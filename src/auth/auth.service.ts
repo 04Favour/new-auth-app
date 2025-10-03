@@ -5,6 +5,7 @@ import { PrismaService } from 'prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { Request, Response } from 'express';
+import { jwtConstants } from './constants';
 
 @Injectable()
 export class AuthService {
@@ -63,7 +64,7 @@ export class AuthService {
 
 
  async hashPassword(password: string) {
-    const saltOrRounds = 10;
+    const saltOrRounds = jwtConstants.saltRounds
     return await bcrypt.hash(password, saltOrRounds);
  }
 

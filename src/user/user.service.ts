@@ -3,7 +3,7 @@ import { BadRequestException, ForbiddenException, Injectable} from '@nestjs/comm
 import { PrismaService } from 'prisma/prisma.service';
 import { Request } from 'express';
 import { userDto } from './user.dto';
-import * as bcrypt from 'bcrypt';
+// import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UserService {
