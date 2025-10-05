@@ -68,4 +68,17 @@ export class UserService {
             }
         })
     }
+
+    async deleteUser(id: string, req:Request){
+        const getUser = await this.prisma.user.findUnique({where:{id}})
+        if (!getUser) {
+            throw new BadRequestException('Oops! User not found')
+        }
+        const decodeUser = req.user as { id: string; email: string };
+        if (getUser.id !== decodeUser.id) {
+            throw new ForbiddenException();
+        }
+        await this.prisma.user.delete({ where: { id } });
+        return { message: 'User deleted successfully' };
+    }
 }

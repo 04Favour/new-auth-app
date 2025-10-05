@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Param, Patch, Req, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Req, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from 'src/auth/jwt.guard';
 import { userDto } from './user.dto';
@@ -23,5 +23,11 @@ export class UserController {
   @Get()
   users() {
     return this.userService.users()
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
+  deleteUser(@Param('id') id: string, @Req() req){
+    return this.userService.deleteUser(id, req)
   }
 }
